@@ -44,7 +44,7 @@ void main() async{
 }
 
 class MainApp extends StatelessWidget {
-  MainApp({super.key});
+  const MainApp({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -73,7 +73,7 @@ class MainApp extends StatelessWidget {
 }
 
 class AuthChecker extends StatelessWidget {
-  const AuthChecker({Key? key}) : super(key: key);
+  const AuthChecker({super.key});
 
   @override
   Widget build(BuildContext context) {

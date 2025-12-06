@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:wish_list/screens/signIn.dart';
 
 class SharePage extends StatefulWidget {
   const SharePage({super.key});

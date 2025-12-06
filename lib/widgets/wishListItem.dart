@@ -6,7 +6,7 @@ class WishListItem extends StatelessWidget {
   final VoidCallback? onTap;
   final VoidCallback? onDelete;
 
-  const WishListItem({
+  const WishListItem({super.key, 
     required this.wishList,
     this.onTap,
     this.onDelete,

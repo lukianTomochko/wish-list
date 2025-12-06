@@ -15,7 +15,7 @@ class DatabaseService {
         'createdAt': Timestamp.now(),
       });
     } catch (e) {
-      throw e;
+      rethrow;
     }
   }
 

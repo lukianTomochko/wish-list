@@ -1,11 +1,8 @@
-import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:wish_list/constants/app_strings.dart';
-import 'package:wish_list/screens/homePage.dart';
 import 'package:wish_list/screens/signUp.dart';
 import 'package:wish_list/utils/form_validation.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 
 import '../services/auth_service.dart';
 

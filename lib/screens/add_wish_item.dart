@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:wish_list/screens/homePage.dart';
 
 import '../models/wish_item_model.dart';
 import '../providers/wish_list_provider.dart';
-import '../widgets/switchModeButton.dart';
 
 class AddWishListItem extends StatefulWidget {
 

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:wish_list/screens/settings.dart';
 import 'package:wish_list/screens/sharePage.dart';
-import 'package:wish_list/screens/signIn.dart';
 import 'package:wish_list/screens/wishListsPage.dart';
 
 class HomePage extends StatefulWidget {

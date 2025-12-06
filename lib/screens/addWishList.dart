@@ -1,9 +1,6 @@
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:wish_list/screens/homePage.dart';
-import 'package:wish_list/screens/signUp.dart';
-import 'package:wish_list/screens/wishListsPage.dart';
 
 import '../models/wish_list_model.dart';
 import '../providers/buy_mode_provider.dart';
