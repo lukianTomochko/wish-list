@@ -14,10 +14,11 @@ class WishListItem extends StatelessWidget {
   });
 
   void _shareList(BuildContext context, String listName, String wishListId) {
-    final String deepLink = 'wishlistapp://share?id=$wishListId';
+
+    final String webLink = 'https://lukianTomochko.github.io/wish-list-share/?id=$wishListId';
 
     final String message = 'Hey, check my wish list "$listName".\n'
-        'In order to save click the link:\n$deepLink';
+        'In order to save click the link:\n$webLink';
 
     Share.share(message);
   }
