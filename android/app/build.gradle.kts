@@ -31,26 +31,11 @@ android {
         versionName = flutter.versionName
     }
 
-    signingConfigs {
-        create("release") {
-            val keystorePath = System.getenv("BITRISEIO_ANDROID_KEYSTORE_PATH")
-            if (keystorePath != null && keystorePath.isNotEmpty()) {
-                storeFile = file(keystorePath)
-            } else {
-                throw GradleException("BITRISEIO_ANDROID_KEYSTORE_PATH is not set")
-            }
-
-            storePassword = System.getenv("BITRISEIO_ANDROID_KEYSTORE_PASSWORD")
-            keyAlias = System.getenv("BITRISEIO_ANDROID_KEYSTORE_ALIAS")
-            keyPassword = System.getenv("BITRISEIO_ANDROID_KEYSTORE_PRIVATE_KEY_PASSWORD")
-        }
-    }
-
     buildTypes {
-        getByName("release") {
-            signingConfig = signingConfigs.getByName("release")
-            isMinifyEnabled = false
-            isShrinkResources = false
+        release {
+            // TODO: Add your own signing config for the release build.
+            // Signing with the debug keys for now, so `flutter run --release` works.
+            signingConfig = signingConfigs.getByName("debug")
         }
     }
 }
