@@ -15,7 +15,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  int _selectedPageIndex = 1;
+  int _selectedPageIndex = 0;
 
   late AppLinks _appLinks;
   StreamSubscription<Uri>? _linkSubscription;
@@ -81,7 +81,7 @@ class _HomePageState extends State<HomePage> {
                     ),
                   );
 
-                  _navigateBottomBar(1);
+                  _navigateBottomBar(0);
                 }
               } catch (e) {
                 if (mounted) {
@@ -105,13 +105,11 @@ class _HomePageState extends State<HomePage> {
   }
 
   final List _pages = [
-    SharePage(),
     WishListPage(),
     SettingsPage(),
   ];
 
   final List<String> _titles = [
-    "Share",
     "WishList",
     "Settings",
   ];
@@ -145,11 +143,6 @@ class _HomePageState extends State<HomePage> {
         currentIndex: _selectedPageIndex,
         onTap: _navigateBottomBar,
         items: [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.share),
-            label: "Share",
-          ),
-
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
             label: "Home",
