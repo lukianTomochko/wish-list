@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:share_plus/share_plus.dart';
 import 'package:wish_list/models/wish_list_model.dart';
 
 class WishListItem extends StatelessWidget {
@@ -11,6 +12,16 @@ class WishListItem extends StatelessWidget {
     this.onTap,
     this.onDelete,
   });
+
+  void _shareList(BuildContext context, String listName, String wishListId) {
+    final String deepLink = 'wishlistapp://share?id=$wishListId';
+
+    final String message = 'Hey, check my wish list "$listName".\n'
+        'In order to save click the link:\n$deepLink';
+
+    Share.share(message);
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -60,7 +71,7 @@ class WishListItem extends StatelessWidget {
                   ),
                   GestureDetector(
                     onTap: () {
-                      // Share functionality
+                      _shareList(context, wishList.name, wishList.id);
                     },
                     child: Icon(
                       Icons.ios_share_rounded,

@@ -12,6 +12,7 @@ abstract class WishListRepository {
   Future<void> updateWishItem(String listId, WishItem item);
   Future<void> removeWishItem(String listId, String itemId);
   Future<void> toggleWishItemDone(String listId, String itemId);
+  Future<void> cloneWishListFromId(String sourceListId);
 }
 
 abstract class UserRepository {

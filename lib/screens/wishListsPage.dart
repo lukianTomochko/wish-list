@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:share_plus/share_plus.dart';
 import 'package:wish_list/screens/addWishList.dart';
 import 'package:wish_list/screens/wish_list_detail_page.dart';
 import 'package:wish_list/widgets/wishListItem.dart';

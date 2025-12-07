@@ -245,5 +245,26 @@ class WishListProvider extends ChangeNotifier {
     }
   }
 
+  Future<void> cloneWishList(String sourceListId) async {
+    if (_repository == null) return;
+
+    _isLoading = true;
+    notifyListeners();
+
+    try {
+      // Викликаємо метод репозиторію (який ми писали раніше)
+      await _repository!.cloneWishListFromId(sourceListId);
+
+      // Оновлюємо список, щоб побачити новий вішліст
+      await loadWishLists();
+    } catch (e) {
+      print('Error cloning list: $e');
+      rethrow;
+    } finally {
+      _isLoading = false;
+      notifyListeners();
+    }
+  }
+
 
 }

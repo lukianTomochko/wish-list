@@ -42,6 +42,48 @@ class FirestoreWishListRepository implements WishListRepository {
     }
   }
 
+  Future<void> cloneWishListFromId(String sourceListId) async {
+    try {
+      final sourceListDoc = await _firestore.collection('wishLists').doc(sourceListId).get();
+
+      if (!sourceListDoc.exists) {
+        throw Exception("List not found");
+      }
+
+      final sourceData = sourceListDoc.data()!;
+
+      final newListRef = await _firestore.collection('wishLists').add({
+        'name': sourceData['name'] + ' (Copy)',
+        'userId': _currentUserId,
+        'isBuyMode': sourceData['isBuyMode'],
+        'createdAt': FieldValue.serverTimestamp(),
+      });
+
+      final sourceItemsSnapshot = await sourceListDoc.reference.collection('items').get();
+
+      final batch = _firestore.batch();
+
+      for (var itemDoc in sourceItemsSnapshot.docs) {
+        final itemData = itemDoc.data();
+
+        final newItemRef = newListRef.collection('items').doc();
+
+        batch.set(newItemRef, {
+          'title': itemData['title'],
+          'price': itemData['price'],
+          'link': itemData['link'],
+          'isDone': false,
+          'createdAt': FieldValue.serverTimestamp(),
+        });
+      }
+
+      await batch.commit();
+
+    } catch (e) {
+      throw Exception('Failed to clone list: $e');
+    }
+  }
+
   @override
   Future<WishList> getWishListById(String id) async {
     try {
