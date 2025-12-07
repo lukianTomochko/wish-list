@@ -34,10 +34,12 @@ android {
     signingConfigs {
         create("release") {
             val keystorePath = System.getenv("BITRISEIO_ANDROID_KEYSTORE_PATH")
-                ?: System.getenv("BITRISEIO_ANDROID_KEYSTORE_URL")
-            if (keystorePath != null) {
+            if (keystorePath != null && keystorePath.isNotEmpty()) {
                 storeFile = file(keystorePath)
+            } else {
+                throw GradleException("BITRISEIO_ANDROID_KEYSTORE_PATH is not set")
             }
+
             storePassword = System.getenv("BITRISEIO_ANDROID_KEYSTORE_PASSWORD")
             keyAlias = System.getenv("BITRISEIO_ANDROID_KEYSTORE_ALIAS")
             keyPassword = System.getenv("BITRISEIO_ANDROID_KEYSTORE_PRIVATE_KEY_PASSWORD")
