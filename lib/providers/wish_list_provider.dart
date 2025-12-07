@@ -1,5 +1,6 @@
 import '../models/wish_item_model.dart';
 import '../models/wish_list_model.dart';
+import '../repositories/firestore_wishlist_repository.dart';
 import '../repositories/wish_list_repository.dart';
 import 'package:flutter/material.dart';
 
@@ -20,6 +21,12 @@ class WishListProvider extends ChangeNotifier {
   String? get userId => _userId;
 
   get isBuyMode => null;
+
+  void setUserData(String uid) {
+    _userId = uid;
+    _repository = FirestoreWishListRepository(uid);
+    loadWishLists();
+  }
 
   set repository(WishListRepository? repo) {
     _repository = repo;
@@ -53,6 +60,11 @@ class WishListProvider extends ChangeNotifier {
 
   // Створити новий wish list
   Future<void> createWishList(String name, bool isBuyMode) async {
+    if (_repository == null || _userId == null) {
+      print("Error: Provider not initialized");
+      return;
+    }
+
     try {
       final newList = WishList(
         id: '',

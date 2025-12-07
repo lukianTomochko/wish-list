@@ -82,10 +82,7 @@ class AuthChecker extends StatelessWidget {
 
     if (user != null) {
       WidgetsBinding.instance.addPostFrameCallback((_) {
-        final provider = context.read<WishListProvider>();
-        provider.repository = FirestoreWishListRepository(user.uid);
-        provider.userId = user.uid;
-        provider.loadWishLists();
+        context.read<WishListProvider>().setUserData(user.uid);
       });
 
       return const HomePage();
