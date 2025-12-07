@@ -1,9 +1,11 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:wish_list/constants/app_strings.dart';
 import 'package:wish_list/screens/signUp.dart';
 import 'package:wish_list/utils/form_validation.dart';
 
+import '../providers/wish_list_provider.dart';
 import '../services/auth_service.dart';
 
 class SignInPage extends StatefulWidget {
@@ -47,12 +49,13 @@ class _SignInPageState extends State<SignInPage> {
 
     try {
 
-      await _authService.login(
+      final userCredential = await _authService.login(
           _userNameOrEmailController.text.trim(),
           _passwordController.text
       );
 
-      if (mounted) {
+      if (userCredential.user != null && mounted) {
+        context.read<WishListProvider>().setUserData(userCredential.user!.uid);
         Navigator.pushReplacementNamed(context, '/home');
       }
     } catch (e) {

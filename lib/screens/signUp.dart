@@ -1,7 +1,9 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:wish_list/screens/signIn.dart';
 import 'package:wish_list/constants/app_strings.dart';
+import '../providers/wish_list_provider.dart';
 import '../services/auth_service.dart';
 import '../utils/form_validation.dart';
 
@@ -46,7 +48,10 @@ class _SignUpPageState extends State<SignUpPage> {
         _passwordController.text,
       );
 
-      if (mounted) {
+      final user = _authService.currentUser;
+
+      if (user != null && mounted) {
+        context.read<WishListProvider>().setUserData(user.uid);
         Navigator.pushReplacementNamed(context, '/home');
       }
     } catch (e) {

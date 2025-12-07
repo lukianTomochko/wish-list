@@ -10,6 +10,16 @@ class AuthService {
 
   Future<UserCredential> register(String username, String email, String password) async {
     try {
+
+      final existingEmail = await _dbService.getUsernameToEmail(username);
+
+      if (existingEmail != null) {
+        throw FirebaseAuthException(
+            code: 'username-already-in-use',
+            message: 'This username is already taken.'
+        );
+      }
+
       UserCredential userCredential =
       await _auth.createUserWithEmailAndPassword(
         email: email,
@@ -77,6 +87,8 @@ class AuthService {
     switch (e.code) {
       case 'email-already-in-use':
         return AppStrings.emailAlreadyInUse;
+      case 'username-already-in-use':
+        return "Username is already taken, please choose another one.";
       case 'invalid-credential':
         return AppStrings.invalidCredential;
       default:
